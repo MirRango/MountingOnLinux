@@ -1,0 +1,55 @@
+                            Disk Partitions in Linux
+
+A disk partition must be formatted and mounted before use. The formatting process can also be done for several other reasons, such as changing the file system, fixing errors, or deleting all data.
+
+================================================
+lsblk
+sudo fdisk /dev/sdb
+n 
+p
+1
+w
+==================================================
+====
+Checking the Partitions
+lsblk
+The terminal prints out a list of all block devices as well as information about them:
+
+    NAME – Device names
+    MAJ:MIN – Major or minor device numbers
+    RM – Whether the device is removable (1 if yes, 0 if no)
+    SIZE – The size of the device
+    RO – Whether the device is read-only
+    TYPE – The type of the device
+    MOUNTPOINT – Device’s mount point
+====
+To display a list containing file system information, add the -f option:
+lsblk -f
+====
+                     Formatting Disk Partition in Linux
+There are three ways to format disk partitions using the mkfs command, depending on the file system type:
+            ext4
+    	    FAT32
+    	    NTFS
+=====
+                     Formatting Disk Partition with ext4 File System
+sudo mkfs -t ext4 /dev/sdb1
+==========
+Formatting Disk Partition with FAT32 File System
+sudo mkfs -t vfat /dev/sdb1
+==========
+Formatting Disk Partition with NTFS File System
+sudo mkfs -t ntfs /dev/sdb1
+==========
+Next, verify the file system change using:
+lsblk -f
+============
+Mounting the Disk Partition in Linux
+sudo mkdir -p [mountpoint]
+sudo mount -t auto /dev/sdb1 [mountpoint]
+==================
+Next, verify the file system change using:
+lsblk -f
+======================
+To mount auto
+vi /etc/fstab
